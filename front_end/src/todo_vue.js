@@ -6,6 +6,7 @@ Vue.directive("to_focus",{
     }
 })
 
+
 let vm = new Vue(
     {
         el:'#app',
@@ -39,8 +40,9 @@ let vm = new Vue(
             // changeHeadName:function(val){
             //     alert(val+'来自父组件！')
             // },
-            temp:function(){
-                console.log(this.cards);
+            temp:function(event){
+                // alert('1');
+                // console.log(event);
             }
         },
         computed:{
@@ -56,9 +58,9 @@ let vm = new Vue(
                 template:
                         `
                         <div class='cards'>
-                            <div class='cards_head'>
-                                <div class="head_name" @click="doit()" v-if='this.show'>{{head_name.name}}</div>
-                                <input class='head_change' v-model="head_name.name" v-else to_focus>
+                            <div class='cards_head' @click="doit($event)">
+                                <div class="head_name"   v-if='this.show'>{{head_name.name}}</div>
+                                <input class='head_change' v-model="head_name.name" v-else v-to_focus>
                                 <div class="head_close">&#10006</div>
                             </div>
                             <hr style="width:96%;margin:0 auto">
@@ -72,10 +74,10 @@ let vm = new Vue(
                     }
                 },
                 methods:{// doit(head_name.name)
-                    doit:function(){
+                    doit:function(event){
                         if(this.show){
                             this.show = false
-                        }else{
+                        }else if(!this.show && event.target.className != 'head_change'){
                             this.show = true
                         }
                         //this.$emit('head-click',val);
@@ -95,13 +97,10 @@ window.onkeypress = (event) => {
             vm.hideInput = true
         }
     }
-    alert(event.keyCode)
 }
 
-
 window.onclick = (event) => {
-    if(vm.hideInput === true && event.target.className != ('submit'||'add'||'input')){
-        alert('working!')
+    if(vm.hideInput === true && event.target.className != 'input addCards'&& event.target.className != 'add'){
+       vm.hideInput = false
     }
-    alert(event.target.className)
 }
