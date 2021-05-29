@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/static/vue.js"></script>
+    <link rel="stylesheet" href="/style/todo_vue.css">
+</head>
+<body>
+    <div id="app">
+        <!-- <cards v-for='items in cards' v-bind:head_name='items' @head-click="changeHeadName"></cards> -->
+        <cards v-for='items in cards' v-bind:head_name='items' v-bind:key='items.id'></cards>
+        <button class="add" @click='addCards()'>添加</button>
+        <input class="input" type="text" :class="addCardsObj" v-if="hideInput" v-to_focus v-model='inputValue'>
+        <button class="submit" v-if="hideInput" @click='adding()'>提交</button>
+        <button id="testButton" @click="temp()">here!</button>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- <div class='cards' >
+                            <div class='cards_head'>
+                                <div class="head_name">{{head_name.name}}</div>
+                                <div class="head_close">&#10006</div>
+                            </div>
+                            <hr style="width:96%;margin:0 auto">
+                            <div class="cards_body"></div>
+                        </div> -->
+    <script src="/src/todo_vue.js"></script>
+</body>
+</html>
