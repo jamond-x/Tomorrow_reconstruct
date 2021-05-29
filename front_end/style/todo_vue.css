@@ -112,3 +112,47 @@
     text-align: center;
     border-radius: 10px;
 }
+
+.pieces{
+    width: 250px;
+    height: 20px;
+    background:transparent;
+    padding: 5px;
+}
+
+.p_left{
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    margin-left: 20px;
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+.p_right{
+    display: inline-block;
+    float: right;
+    margin-right: 25px;
+    margin-top: 1px;
+    cursor: pointer;
+}
+
+.icon-gengduo-tianchong{
+    font-family: "iconfont" !important;
+    font-size:25px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.pieces input{
+    width: 120px;
+    height: 20px;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    margin-left: -50px;
+    margin-top: 4px;
+    padding-left: 15px;
+}

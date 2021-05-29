@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tomorrow</title>
+    <link rel="shortcut icon" href="/front_end/static/icon/待办.png" type="image/x-icon">
+    <link rel="stylesheet" href="/front_end/style/iconfont.css">
     <script src="../public/vue/vue.js"></script>
     <link rel="stylesheet" href="/front_end/style/todo_vue.css">
 </head>
@@ -12,14 +14,23 @@
     <div id="app">
         <!-- <cards v-for='items in cards' v-bind:head_name='items' @head-click="changeHeadName"></cards> -->
         
-        <cards v-for='items in cards' v-bind:head_name='items' v-bind:key='items.id' @deleting_cards='deleting'></cards>
-        
+        <cards v-for='items in cards' v-bind:head_name='items' v-bind:key='items.id' @deleting_cards='deleting'>
+            <!-- <div class="pieces" v-for='items_ in items.pieces'>
+                <input type="text" v-if='p_input' @click='p_input = !p_input'>
+                <div class="p_left" v-else='p_input' @click='p_input = !p_input'>{{items_.val}}</div>
+                <div class="p_right">
+                    <i class="icon-gengduo-tianchong"></i>
+                </div>
+            </div> -->
+            <pieces v-bind:content='items_' v-for='items_ in items.pieces' v-bind:key='items_.id'></pieces>
+        </cards>
         <button class="add" @click='addCards()'>添加</button>
         
         <input class="input" type="text" :class="addCardsObj" v-if="hideInput" v-to_focus v-model='inputValue'>
         
         <button class="submit" v-if="hideInput" @click='adding()'>提交</button>
         
+
         <!-- <button id="testButton" @click="temp($event)">here!</button> -->
     </div>
 

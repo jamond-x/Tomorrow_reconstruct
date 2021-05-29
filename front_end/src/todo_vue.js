@@ -1,16 +1,35 @@
 
-Vue.directive("to_focus",{
+Vue.directive("to_focus",{         // 自定义组件
     inserted:function(el){
         el.focus()
     }
 })
 
 
+Vue.component('pieces',{
+    data:function(){
+        return{
+            p_input:false
+        }
+    },
+    template:`<div class="pieces">
+        <input type="text" v-if='p_input' @click='p_input = !p_input' v-model='content.val' v-to_focus>
+        <div class="p_left" v-else='p_input' @click='p_input = !p_input'>{{content.val}}</div>
+        <div class="p_right">
+            <i class="icon-gengduo-tianchong"></i>
+        </div>
+    </div>`,
+    props:['content']    
+}
+)
+
+
+
 let vm = new Vue(
     {
         el:'#app',
         data:{
-            cards:[{name:'今日',id:'1',pieces:['学Axios','ES6模板']},{name:'明日',id:'2',pieces:['学Axios','ES6模板']},{name:'后日',id:'3',pieces:['学Axios','ES6模板']}],
+            cards:[{name:'今日',id:'1',pieces:[{id_:1,val:'Vue 过渡&动画'},{id_:2,val:'Webpack'}]},{name:'明日',id:'2',pieces:[{id_:1,val:'复习线代'},{id_:2,val:'数学作业'}]},{name:'后日',id:'3',pieces:[{id_:1,val:'quasar'},{id_:2,val:'vuetify'}]}],
             addCardsObj:{
                 addCards:true,
                 hide:false
@@ -81,7 +100,9 @@ let vm = new Vue(
                                 <div class="head_close" @click='delete_cards($event,head_name.id)'>&#10006</div>
                             </div>
                             <hr style="width:96%;margin:0 auto">
-                            <div class="cards_body"></div>
+                            <div class="cards_body">
+                                <slot></slot>   
+                            </div>
                         </div>
                         `,
                 props:{
