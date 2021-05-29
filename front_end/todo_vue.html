@@ -11,11 +11,16 @@
 <body>
     <div id="app">
         <!-- <cards v-for='items in cards' v-bind:head_name='items' @head-click="changeHeadName"></cards> -->
-        <cards v-for='items in cards' v-bind:head_name='items' v-bind:key='items.id'></cards>
+        
+        <cards v-for='items in cards' v-bind:head_name='items' v-bind:key='items.id' @deleting_cards='deleting'></cards>
+        
         <button class="add" @click='addCards()'>添加</button>
+        
         <input class="input" type="text" :class="addCardsObj" v-if="hideInput" v-to_focus v-model='inputValue'>
+        
         <button class="submit" v-if="hideInput" @click='adding()'>提交</button>
-        <button id="testButton" @click="temp($event)">here!</button>
+        
+        <!-- <button id="testButton" @click="temp($event)">here!</button> -->
     </div>
 
 
