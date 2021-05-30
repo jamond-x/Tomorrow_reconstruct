@@ -12,17 +12,15 @@
 </head>
 <body>
     <div id="app">
-        <!-- <cards v-for='items in cards' v-bind:head_name='items' @head-click="changeHeadName"></cards> -->
         
         <cards v-for='items in cards' v-bind:head_name='items' v-bind:key='items.id' @deleting_cards='deleting'>
-            <!-- <div class="pieces" v-for='items_ in items.pieces'>
-                <input type="text" v-if='p_input' @click='p_input = !p_input'>
-                <div class="p_left" v-else='p_input' @click='p_input = !p_input'>{{items_.val}}</div>
-                <div class="p_right">
-                    <i class="icon-gengduo-tianchong"></i>
-                </div>
-            </div> -->
-            <pieces v-bind:content='items_' v-for='items_ in items.pieces' v-bind:key='items_.id'></pieces>
+           
+            <template v-slot:pieces>
+                <pieces v-bind:content='items_' v-for='items_ in items.pieces' v-bind:key='items_.id'></pieces>
+            </template>
+            <template v-slot:add>
+                <div class="icon-tianjiajiahaowubiankuang add_task" @click='temp()'></div>
+            </template>
         </cards>
         <button class="add" @click='addCards()'>添加</button>
         
@@ -31,7 +29,6 @@
         <button class="submit" v-if="hideInput" @click='adding()'>提交</button>
         
 
-        <!-- <button id="testButton" @click="temp($event)">here!</button> -->
     </div>
 
 

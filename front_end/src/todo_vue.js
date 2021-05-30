@@ -9,17 +9,23 @@ Vue.directive("to_focus",{         // 自定义组件
 Vue.component('pieces',{
     data:function(){
         return{
-            p_input:false
+            p_input:false,
+            isUnderline:false
         }
     },
     template:`<div class="pieces">
-        <input type="text" v-if='p_input' @click='p_input = !p_input' v-model='content.val' v-to_focus>
-        <div class="p_left" v-else='p_input' @click='p_input = !p_input'>{{content.val}}</div>
+        <div class="p_left" v-bind:class="{'underline':isUnderline}"  @click='pieces_done(content.id_)'>{{content.val}}</div>
         <div class="p_right">
             <i class="icon-gengduo-tianchong"></i>
         </div>
     </div>`,
-    props:['content']    
+    props:['content'],
+    methods:{
+        pieces_done:function(id){
+            //alert(id);   //  调整pieces的位置   操作数组！
+            this.isUnderline = !this.isUnderline
+        }
+    }  
 }
 )
 
@@ -68,7 +74,8 @@ let vm = new Vue(
                 this.hideInput = false
             },
            
-            temp:function(event){
+            temp:function(){
+                alert('add_task working')
             },
             deleting:function(param){
                 let index = this.cards_record_map.get(param);   // 需要删除的对象在cards数组中的索引
@@ -88,20 +95,22 @@ let vm = new Vue(
             'cards':{
                 data:function(){
                     return {
-                        show:true
+                        show:true,
+                        mycards:this.head_name,
                     }
                 },
                 template:
                         `
                         <div class='cards'>
                             <div class='cards_head' @click="doit($event)">
-                                <div class="head_name"   v-if='this.show'>{{head_name.name}}</div>
-                                <input class='head_change' v-model="head_name.name" v-else v-to_focus>
-                                <div class="head_close" @click='delete_cards($event,head_name.id)'>&#10006</div>
+                                <div class="head_name"   v-if='this.show'>{{mycards.name}}</div>
+                                <input class='head_change' v-model="mycards.name" v-else v-to_focus>
+                                <div class="head_close" @click='delete_cards($event,mycards.id)'>&#10006</div>
                             </div>
                             <hr style="width:96%;margin:0 auto">
                             <div class="cards_body">
-                                <slot></slot>   
+                                <slot name='pieces'></slot>   
+                                <slot name='add'></slot>
                             </div>
                         </div>
                         `,
@@ -122,6 +131,18 @@ let vm = new Vue(
                     delete_cards:function(event,id_){
                         event.stopPropagation();            // 阻止冒泡 阻止打开卡片编辑框
                         this.$emit('deleting_cards',id_)
+                    }
+                },
+                watch:{
+                    show:function(newV,oldV){
+                        console.log(newV);
+                        console.log(oldV);
+                    }
+                },
+                computed:{
+                    forwatch:function(){
+                        console.log(this.mycards);
+                        return this.mycards
                     }
                 }
             }
@@ -145,3 +166,6 @@ window.onclick = (event) => {
        vm.hideInput = false
     }
 }
+
+
+// TODO:删除、添加卡片，删除、添加任务条的数据处理

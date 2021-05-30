@@ -156,3 +156,22 @@
     margin-top: 4px;
     padding-left: 15px;
 }
+
+.underline{
+    text-decoration: line-through;
+}
+
+.icon-tianjiajiahaowubiankuang{
+    font-family: "iconfont" !important;
+    font-size: 20px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-left: 45px;
+}
+
+
+.add_task:hover{
+    transform: scale(1.05);
+    display: inline;
+}
