@@ -9,10 +9,45 @@
     <link rel="stylesheet/less" href="/front_end/style/style.less">
     <script src="/public/less.min.js"> </script>
     <script src="/public/vue/vue.js"></script>
+    <script src="/public/axios.min.js"></script>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+            <sign-in @submitting='submitting'>
+                <template v-slot:main_>
+                    <myinput @reception_email="handle_email" @reception_password='handle_password'></myinput>
+                </template>
+            </sign-in>
+    </div>
 
+
+
+
+
+
+
+
+
+
+
+    <template id="sign-in">
+        <div class='container'>
+            <div class='head_'></div>
+            <div class="main_">
+                <slot name="main_"></slot>
+            </div>
+            <div class="footer">
+                <button type="button" @click="submit">登录</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="myinput">
+        <div>
+            <input type="email" placeholder="邮箱" v-model="email"><br>
+            <input type="password" placeholder="密码" v-model="password">
+        </div>
+    </template>
 
     <script src="/front_end/src/signIn_.js"></script>
 </body>
