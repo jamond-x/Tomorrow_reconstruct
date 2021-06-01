@@ -168,4 +168,12 @@ window.onclick = (event) => {
 }
 
 
+// TODO:  Duplicate keys detected: '3'. This may cause an update error.
+
+// MAP 数据有问题！！
+
 // TODO:删除、添加卡片，删除、添加任务条的数据处理
+
+// TODO:子组件通信 子 父 子
+
+// TODO:<transition></transition>   不能写在组件注册 template 中？？

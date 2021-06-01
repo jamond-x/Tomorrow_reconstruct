@@ -1,4 +1,6 @@
 
+//import com from './template.vue'
+
 Vue.component('sign-in',{
     template:'#sign-in',
     data:function(){

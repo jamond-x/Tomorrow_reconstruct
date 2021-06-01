@@ -12,16 +12,17 @@
 </head>
 <body>
     <div id="app">
-        
-        <cards v-for='items in cards' v-bind:head_name='items' v-bind:key='items.id' @deleting_cards='deleting'>
-           
-            <template v-slot:pieces>
-                <pieces v-bind:content='items_' v-for='items_ in items.pieces' v-bind:key='items_.id'></pieces>
-            </template>
-            <template v-slot:add>
-                <div class="icon-tianjiajiahaowubiankuang add_task" @click='temp()'></div>
-            </template>
-        </cards>
+        <transition-group name='change'>
+            <cards v-for='items in cards' v-bind:head_name='items' v-bind:key='items.id' @deleting_cards='deleting'>
+            
+                <template v-slot:pieces>
+                    <pieces v-bind:content='items_' v-for='items_ in items.pieces' v-bind:key='items_.id'></pieces>
+                </template>
+                <template v-slot:add>
+                    <div class="icon-tianjiajiahaowubiankuang add_task" @click='temp()'></div>
+                </template>
+            </cards>
+        </transition-group>
         <button class="add" @click='addCards()'>添加</button>
         
         <input class="input" type="text" :class="addCardsObj" v-if="hideInput" v-to_focus v-model='inputValue'>
@@ -31,22 +32,7 @@
 
     </div>
 
-
-
-
-
-
-
-
-
-    <!-- <div class='cards' >
-                            <div class='cards_head'>
-                                <div class="head_name">{{head_name.name}}</div>
-                                <div class="head_close">&#10006</div>
-                            </div>
-                            <hr style="width:96%;margin:0 auto">
-                            <div class="cards_body"></div>
-                        </div> -->
-    <script src="/front_end/src/todo_vue.js"></script>
+    
+    <script  src="/front_end/src/todo_vue.js"></script>
 </body>
 </html>
