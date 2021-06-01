@@ -66,13 +66,16 @@ let vm = new Vue(
             },
             handle_res:function(data_){
                 if(data_.status === 200){
-                    if(data_.data.code === 0){
-                        console.log("登陆成功");
+                    if(data_.data.code === '0'){
+                        alert('登陆成功');
                         // 路径跳转
-                    }else if(data_.data.code === 1){   
+                        window.location.href = '/front_end/todo_vue.html'
+                    }else if(data_.data.code === '1'){   
                         console.log("密码错误");
-                    }else if(data_.data.code === 2){
+                    }else if(data_.data.code === '2'){
                         // do something
+                    }else{
+                        alert('worng')
                     }
                 }else{  //  具体加 else if ( status == 404)  等
                     console.log('服务器相应失败');
@@ -82,3 +85,6 @@ let vm = new Vue(
         }
     }
 )
+
+
+// TODO: 拦截器！
