@@ -47,11 +47,12 @@ let vm = new Vue(
             card_id:function(){
                 let id_;
                 
-                let map = this.cards_record_map;
+                let map = this.cards_record_map();
 
                 for(let i = 1;id_ == undefined; i++){
                     if(!map.has(`${i}`)){
                         id_ = i
+                        console.log("返回新的id为： "+i);
                     }
                 }
                return id_
@@ -78,11 +79,10 @@ let vm = new Vue(
                 alert('add_task working')
             },
             deleting:function(param){
-                let index = this.cards_record_map.get(param);   // 需要删除的对象在cards数组中的索引
-                this.cards.splice(index,1)
-            }
-        },
-        computed:{
+                let index = this.cards_record_map().get(param);   // 需要删除的对象在cards数组中的索引
+                this.cards.splice(index,1);
+                this.cards_record_map().delete(param)    // 删除 map中相应值
+            },
             cards_record_map:function(){
                 let map =new Map();
                 (this.cards).forEach((el,index) => {
@@ -90,6 +90,9 @@ let vm = new Vue(
                 });
                 return map
             }
+        },
+        computed:{
+            
         },
         components:{
             'cards':{
