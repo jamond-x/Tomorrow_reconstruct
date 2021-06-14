@@ -1,6 +1,6 @@
 <h1 align="center"> Tomorrow_reconstruct</h1>
 
-<p align="center"> Reconstruct the Tomorrow with Vue. A small demo for practicing
+<p align="center"> Reconstruct the Tomorrow with Vue. A small demo for practicing基础练习
 </p>
 
 <p align="center">
