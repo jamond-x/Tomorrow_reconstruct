@@ -1,3 +1,6 @@
+//import Vue from 'vue'
+//import demo from './template.vue'
+
 
 Vue.directive("to_focus",{         // 自定义组件
     inserted:function(el){
@@ -28,6 +31,43 @@ Vue.component('pieces',{
     }  
 }
 )
+
+let temp_obj = {one:'from temp'}
+
+const Feature = Vue.component('demo',{
+    data:function(){
+        return{
+            obj:{one:'first',two:'second'},
+            arr:[111,222,333],
+            val:'11'
+        }
+    },
+    template:`<div id="test">
+    <slot></slot>
+    <button @click='change'>{{obj.one}}</button>
+  </div>`,
+    methods:{
+        change:function(){
+            this.obj.one = '46545'
+        },
+        again:function(){
+            this.obj.one = '哈哈哈哈'
+        }
+    },
+    watch:{
+        listen:{
+            deep:true,
+            handler:function(newval,oldval){
+                console.log('新值:'+newval.one+'旧值:'+oldval.one)
+            }
+        }
+    },
+    computed:{
+        listen:function(){
+            return this.obj
+        }
+    }
+});
 
 
 
@@ -180,3 +220,5 @@ window.onclick = (event) => {
 // TODO:子组件通信 子 父 子
 
 // TODO:<transition></transition>   不能写在组件注册 template 中？？
+
+// TODO: watch  对象！  通过计算属性监听引用值问题！！
